@@ -1,0 +1,66 @@
+body {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.listing:hover {
+    border: 1px solid grey;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.img img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+}
+.imgTitle {
+    text-align: center;
+    font-size: 25px;
+}
+.imgTitle a {
+    text-decoration: none;
+}
+.formInput {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.formInput label {
+    display: flex;
+    margin: 10px;
+    width: 100px;
+    justify-content: flex-start;
+}
+.formInput textarea {
+    width: 190px;
+}
+.formInput button {
+    display: flex;
+    justify-content: flex-start;
+}
+.formBid {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.formComment {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.formComment .formInput button {
+    margin: 10px;
+}
+ul {
+    list-style-type: none;
+}
+.info {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+ul li a {
+    text-decoration: none;
+}
