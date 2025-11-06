@@ -2,29 +2,50 @@
 
 {% block body %}
 
-    <h2>Register</h2>
+<div data-aos="fade-up">
+    <h2 class="page-title">Create Account</h2>
+</div>
 
+<div class="form-container" data-aos="fade-up" data-aos-delay="100">
     {% if message %}
-        <div>{{ message }}</div>
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
     {% endif %}
 
     <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
+        
         <div class="form-group">
-            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+            <label for="username">Username</label>
+            <input class="form-control" autofocus type="text" name="username" id="username" placeholder="Choose a username" required>
         </div>
+
         <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
+            <label for="email">Email Address</label>
+            <input class="form-control" type="email" name="email" id="email" placeholder="your@email.com" required>
         </div>
+
         <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
+            <label for="password">Password</label>
+            <input class="form-control" type="password" name="password" id="password" placeholder="Create a strong password" required>
         </div>
+
         <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+            <label for="confirmation">Confirm Password</label>
+            <input class="form-control" type="password" name="confirmation" id="confirmation" placeholder="Re-enter your password" required>
         </div>
-        <input class="btn btn-primary" type="submit" value="Register">
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit" style="width: 100%;">
+                📝 Register
+            </button>
+        </div>
     </form>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    <p style="text-align: center; margin-top: 1.5rem; color: #6b7280;">
+        Already have an account? <a href="{% url 'login' %}" style="color: #6366f1; font-weight: 600;">Log in here</a>
+    </p>
+</div>
 
 {% endblock %}

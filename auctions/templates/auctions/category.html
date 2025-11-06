@@ -1,14 +1,30 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-<div>
-  <h2>Listings in {{ category }}</h2>
+
+<div data-aos="fade-up">
+    <h2 class="page-title">📦 {{ category }}</h2>
 </div>
-<div>
-  <ul>
-     {% for listing in listings %}
-       <li><a href="{% url 'listing' listing.id %}">{{ listing.title }}</a></li>
-     {% endfor %}
-  </ul>
+
+{% if listings %}
+<div class="listings-grid">
+    {% for listing in listings %}
+    <div class="listing-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}00">
+        <img src="{{ listing.image_url }}" alt="{{ listing.title }}" class="listing-image" onerror="this.src='https://via.placeholder.com/300x250?text=No+Image'">
+        <div class="listing-content">
+            <a href="{% url 'listing' listing.id %}" class="listing-title">{{ listing.title }}</a>
+            <div class="listing-price">${{ listing.highest_bid }}</div>
+            <div class="listing-owner">👤 {{ listing.owner }}</div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
+{% else %}
+<div class="empty-state" data-aos="fade-up">
+    <div class="empty-state-icon">📭</div>
+    <p class="empty-state-text">No listings in this category yet.</p>
+    <a href="{% url 'categories' %}" class="btn btn-primary" style="margin-top: 1rem;">Browse All Categories</a>
+</div>
+{% endif %}
+
 {% endblock %}

@@ -1,14 +1,24 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-<div>
-  <h2>Categories</h2>
+<div data-aos="fade-up">
+    <h2 class="page-title">Browse Categories</h2>
 </div>
-<div>
-  <ul>
-     {% for category in categories %}
-       <li><a href="{% url 'category' category %}">{{ category }}</a></li>
-     {% endfor %}
-  </ul>
+
+{% if categories %}
+<ul class="category-list">
+    {% for category in categories %}
+    <li class="category-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}0">
+        <a href="{% url 'category' category %}" class="category-link">
+            {{ category }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<div class="empty-state" data-aos="fade-up">
+    <div class="empty-state-icon">📦</div>
+    <p class="empty-state-text">No categories available yet.</p>
 </div>
+{% endif %}
 {% endblock %}

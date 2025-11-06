@@ -2,23 +2,40 @@
 
 {% block body %}
 
-    <h2>Login</h2>
+<div data-aos="fade-up">
+    <h2 class="page-title">Welcome Back</h2>
+</div>
 
+<div class="form-container" data-aos="fade-up" data-aos-delay="100">
     {% if message %}
-        <div>{{ message }}</div>
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
     {% endif %}
 
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
+        
         <div class="form-group">
-            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+            <label for="username">Username</label>
+            <input autofocus class="form-control" type="text" name="username" id="username" placeholder="Enter your username" required>
         </div>
+
         <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
+            <label for="password">Password</label>
+            <input class="form-control" type="password" name="password" id="password" placeholder="Enter your password" required>
         </div>
-        <input class="btn btn-primary" type="submit" value="Login">
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit" style="width: 100%;">
+                🔐 Log In
+            </button>
+        </div>
     </form>
 
-    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+    <p style="text-align: center; margin-top: 1.5rem; color: #6b7280;">
+        Don't have an account? <a href="{% url 'register' %}" style="color: #6366f1; font-weight: 600;">Register here</a>
+    </p>
+</div>
 
 {% endblock %}

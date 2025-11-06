@@ -2,21 +2,29 @@
 
 {% block body %}
 
-<div>
-    <h2>Your Watchlist</h2>
+<div data-aos="fade-up">
+    <h2 class="page-title">⭐ Your Watchlist</h2>
 </div>
-<div>
-    {% if listings %}
-  <ul>
-     {% for listing in listings %}
-      <li><a href="{% url 'listing' listing.id %}">{{ listing.title }}</a></li>
+
+{% if listings %}
+<div class="listings-grid">
+    {% for listing in listings %}
+    <div class="listing-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}00">
+        <img src="{{ listing.image_url }}" alt="{{ listing.title }}" class="listing-image" onerror="this.src='https://via.placeholder.com/300x250?text=No+Image'">
+        <div class="listing-content">
+            <a href="{% url 'listing' listing.id %}" class="listing-title">{{ listing.title }}</a>
+            <div class="listing-price">${{ listing.highest_bid }}</div>
+            <div class="listing-owner">👤 {{ listing.owner }}</div>
+        </div>
+    </div>
     {% endfor %}
-  </ul>
-     {% else %}
-     <p>You have no items in your watchlist.</p>
-     {% endif %}
 </div>
-
-
+{% else %}
+<div class="empty-state" data-aos="fade-up">
+    <div class="empty-state-icon">⭐</div>
+    <p class="empty-state-text">Your watchlist is empty. Start adding items you're interested in!</p>
+    <a href="{% url 'index' %}" class="btn btn-primary" style="margin-top: 1rem;">Browse Listings</a>
+</div>
+{% endif %}
 
 {% endblock %}

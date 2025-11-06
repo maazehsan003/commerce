@@ -1,22 +1,27 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
-    <div class="container">
-      <div class="row">
-       {% for listing in listings %}
-       <div class="listing col-6">
-         <div class="img">
-          <img src="{{ listing.image_url }}" alt="Listing Image">
-         </div>
-         <div class="imgTitle">
-          <a href="{% url 'listing' listing.id %}">{{ listing.title }}</a><br>
-          <p>Price: ${{ listing.highest_bid }} <br>{{ listing.owner }}</p>
-         </div>
-       </div>
-       
-       {% endfor %}     
-      </div>
+<div data-aos="fade-up">
+    <h2 class="page-title">Active Listings</h2>
+</div>
+
+{% if listings %}
+<div class="listings-grid">
+    {% for listing in listings %}
+    <div class="listing-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:'0' }}00">
+        <img src="{{ listing.image_url }}" alt="{{ listing.title }}" class="listing-image" onerror="this.src='https://via.placeholder.com/300x250?text=No+Image'">
+        <div class="listing-content">
+            <a href="{% url 'listing' listing.id %}" class="listing-title">{{ listing.title }}</a>
+            <div class="listing-price">${{ listing.highest_bid }}</div>
+            <div class="listing-owner">👤 {{ listing.owner }}</div>
+        </div>
     </div>
-    
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state" data-aos="fade-up">
+    <div class="empty-state-icon">📭</div>
+    <p class="empty-state-text">No active listings available at the moment.</p>
+</div>
+{% endif %}
 {% endblock %}
